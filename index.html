@@ -2,16 +2,16 @@
 <body>
 
 <table>
-    <tr><td style="font-family:verdana;">Klistra in underlaget här:</td></tr>
+    <h1><td nowrap style="font-family:verdana;">Klistra in underlaget här (postnumrens format får vara XXX XX och/eller XXXXX):</td></h1>
     <tr>
-        <td colspan="3">
+        <td nowrap colspan="3">
             <textarea id="inputTextToSave" cols="140" rows="50"></textarea>
         </td>
     </tr>
     <tr>
-        <td style="font-family:verdana">Spara textfil som:
-        <input id="inputFileNameToSaveAs" size="50"></input></td>
-        <td><button onclick="saveTextAsFile()"  style="width: 463px; height: 21px;font-family:verdana">Spara postnumren till textfil</button></td>
+        <td nowrap style="font-family:verdana">Spara textfil som:
+        <input id="inputFileNameToSaveAs" size="50"></input> <button onclick="saveTextAsFile()"  style="width: 463px; height: 21px;font-family:verdana">Spara postnumren till textfil</button></td>
+        <tr><td nowrap style="font-size:80%; font-family:verdana;">(Textfilen kommer innehålla enbart postnumren i en enkel kolumn)</td></tr>
     </tr>
 </table>
 

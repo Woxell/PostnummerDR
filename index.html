@@ -35,6 +35,7 @@ function saveTextAsFile()
       }
       if(!isNaN(fiveZip) &&
          !fiveZip.includes(' ')      &&
+         !fiveZip.includes('	')   &&
          !zipCodes.includes(fiveZip) &&
          isNaN(parseInt(text.charAt(i-7)))){
         var zipCodes = zipCodes.concat(fiveZip+"\r\n");

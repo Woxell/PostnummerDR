@@ -2,22 +2,30 @@
 <body>
 
 <table>
-    <h1><td nowrap style="font-family:verdana;">Klistra in underlaget här:</td></h1>
+    <h1><td nowrap style="font-family:verdana;">✺✺✺✺✺ Välkommen till Andrés magiska postnummerläsare ✺✺✺✺✺</td></h1>
     <tr>
         <td nowrap colspan="3">
-            <textarea id="inputTextToSave" cols="100" rows="40"></textarea>
+            <textarea placeholder="Klistra in underlaget här..." id="inputTextToSave" cols="100" rows="40"></textarea>
         </td>
     </tr>
     <tr>
         <td nowrap style="font-family:verdana">Spara textfil som:
-        <input id="inputFileNameToSaveAs" size="30"></input> <button onclick="saveTextAsFile()"  style="width: 325px; height: 21px;font-family:verdana">Spara postnumren till textfil</button></td>
-        <tr><td nowrap style="font-size:80%; font-family:verdana;">(Textfilen kommer innehålla enbart postnumren i en enkel kolumn)</td></tr>
-    </tr>
+        <input placeholder=" -Valfritt-" class="search" onkeydown="search(this)" id="inputFileNameToSaveAs" size="30">			</input> 
+        <button onclick="saveTextAsFile()"  style="width: 322px; height: 21px;font-family:verdana">Spara postnumren till textfil
+        </button>
+        </td>
+        
+        <!--<tr><td nowrap style="font-size:80%; font-family:verdana;">(Textfilen kommer innehålla enbart postnumren i en enkel kolumn)</td></tr>-->
+    	</tr>
 </table>
 
 <script type="text/javascript">
 
-
+function search(submit) {
+    if(event.keyCode == 13) {
+        saveTextAsFile();       
+    }
+}
 
 function saveTextAsFile()
 {
@@ -33,19 +41,16 @@ function saveTextAsFile()
       else if(isNaN(parseInt(sixZip.charAt(5)))){
         var fiveZip = sixZip.substring(0,5)
       }
-      if(!isNaN(fiveZip) &&
-         !fiveZip.includes(' ')      &&
-         !fiveZip.includes('	')   &&
+      if(parseInt(fiveZip)>10000 	 && 
+      	 parseInt(fiveZip)<100000	 &&
          !zipCodes.includes(fiveZip) &&
          isNaN(parseInt(text.charAt(i-7)))){
         var zipCodes = zipCodes.concat(fiveZip+"\r\n");
       }
     }
-
     var textToSaveAsBlob = new Blob([zipCodes], {type:"text/plain"});
     var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
     var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
-
     var downloadLink = document.createElement("a");
     downloadLink.download = fileNameToSaveAs;
     downloadLink.innerHTML = "Download File";
@@ -53,15 +58,12 @@ function saveTextAsFile()
     downloadLink.onclick = destroyClickedElement;
     downloadLink.style.display = "none";
     document.body.appendChild(downloadLink);
-
     downloadLink.click();
 }
-
 function destroyClickedElement(event)
 {
     document.body.removeChild(event.target);
 }
-
 </script>
 
 </body>

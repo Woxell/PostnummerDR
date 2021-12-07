@@ -36,10 +36,13 @@ function saveTextAsFile()
     var i;
     for(i=6;i<=textLength;i++){
       var sixZip = text.substring((i-6),i);
-      if(sixZip.charAt(3)==' ' && isNaN(parseInt(text.charAt(i)))){
+      if(sixZip.charAt(3)==' ' && isNaN(parseInt(text.charAt(i)))){ //läser XXX XX
         var fiveZip = sixZip.substring(0,3) + sixZip.substring(4);
       }
-      else if(isNaN(parseInt(sixZip.charAt(5)))){
+      else if(sixZip.charAt(2)==' ' && isNaN(parseInt(text.charAt(i)))){ //läser XX XXX 
+        var fiveZip = sixZip.substring(0,2) + sixZip.substring(3);
+      }
+      else if(isNaN(parseInt(sixZip.charAt(5)))){ //Läser XXXXX
         var fiveZip = sixZip.substring(0,5)
       }
       if(parseInt(fiveZip)>10000 	 && 

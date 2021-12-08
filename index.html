@@ -21,9 +21,9 @@
 
   <table>
     <h1>
-      <td nowrap style="font-family:verdana;">✺✺✺✺✺✺✺✺✺✺ Välkommen till Andrés
+      <td nowrap style="font-family:verdana;">✺✺✺✺✺✺✺✺✺✺✺ Välkommen till Andrés
         <span style="color: gold; background-color: black;font-family: Courier New"><strong>&nbsp;premium&nbsp;</strong></span>
-        postnummerläsare™ ✺✺✺✺✺✺✺✺✺✺✺
+        postnummerläsare™ ✺✺✺✺✺✺✺✺✺✺✺✺
       </td>
     </h1>
     <tr>
@@ -90,9 +90,9 @@
       for (i = 6; i <= textLength; i++) {
         var sevenZip = text.substring((i - 6), i + 1)
         if (sevenZip.charAt(3) == ' ' && isNaN(parseInt(text.charAt(i)))) { //läser XXX XX
-          var fiveZip = sevenZip.substring(0, 3) + sevenZip.substring(4)
+          var fiveZip = sevenZip.substring(0, 3) + sevenZip.substring(4, 6)
         } else if (sevenZip.charAt(2) == ' ' && isNaN(parseInt(text.charAt(i)))) { //läser XX XXX
-          var fiveZip = sevenZip.substring(0, 2) + sevenZip.substring(3)
+          var fiveZip = sevenZip.substring(0, 2) + sevenZip.substring(3, 6)
         } else if (isNaN(parseInt(sevenZip.charAt(0))) && isNaN(parseInt(sevenZip.charAt(6)))) { //Läser XXXXX
           var fiveZip = sevenZip.substring(1, 6)
         }

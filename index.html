@@ -1,27 +1,48 @@
 <html>
-<title>Postnummerläsare Premium</title>
+<title>Postnummerläsaren™</title>
 
-<body>
+<head>
+  <!--<script>
+    message = "✺Postnummerläsaren✺";
+    pos = 0;
 
-<table>
-    <h1><td nowrap style="font-family:verdana;">✺✺✺✺✺✺✺✺✺✺✺ Välkommen till Andrés premium postnummerläsare ✺✺✺✺✺✺✺✺✺✺✺✺</td></h1>
+    function scrollTitleMsg() {
+      document.title = message.substring(pos, message.length) + message.substring(0, pos);
+      pos++;
+      if (pos > message.length) {
+        pos = 0;
+      }
+      setTimeout("scrollTitleMsg()", 150);
+    }
+  </script>-->
+</head>
+
+<body onload=scrollTitleMsg()>
+
+  <table>
+    <h1>
+      <td nowrap style="font-family:verdana;">✺✺✺✺✺✺✺✺✺✺✺ Välkommen till Andrés
+        <span style="color: gold; background-color: black;font-family: Courier New"><strong>&nbsp;premium&nbsp;</strong></span>
+        postnummerläsare™ ✺✺✺✺✺✺✺✺✺✺✺✺
+      </td>
+    </h1>
     <tr>
-        <td nowrap colspan="3">
-            <textarea placeholder="Klistra in underlaget här..." id="inputTextToSave" cols="100" rows="40"></textarea>
-        </td>
+      <td nowrap colspan="3">
+        <textarea placeholder="Klistra in underlaget här..." id="inputTextToSave" cols="100" rows="40"></textarea>
+      </td>
     </tr>
     <tr>
-        <td nowrap style="font-family:verdana">Spara textfil som:
-        <input placeholder=" -Valfritt-" class="search" onkeydown="search(this)" id="inputFileNameToSaveAs" size="30">			</input> 
-        <button onclick="saveTextAsFile()"  style="width: 322px; height: 22px;font-family:verdana">Spara postnumren till textfil
+      <td nowrap style="font-family:verdana">Spara textfil som:
+        <input placeholder=" -Valfritt-" class="search" onkeydown="search(this)" id="inputFileNameToSaveAs" size="30"> </input>
+        <button onclick="saveTextAsFile()" style="width: 322px; height: 22px;font-family:verdana">Spara postnumren till textfil
         </button>
-        </td>
-        
-        <!--<tr><td nowrap style="font-size:80%; font-family:verdana;">(Textfilen kommer innehålla enbart postnumren i en enkel kolumn)</td></tr>-->
-    	</tr>
-</table>
+      </td>
 
-<script type="text/javascript">
+      <!--<tr><td nowrap style="font-size:80%; font-family:verdana;">(Textfilen kommer innehålla enbart postnumren i en enkel kolumn)</td></tr>-->
+    </tr>
+  </table>
+
+  <script type="text/javascript">
     function search(submit) {
       if (event.keyCode == 13) {
         saveTextAsFile()
@@ -104,4 +125,5 @@
   </script>
 
 </body>
+
 </html>

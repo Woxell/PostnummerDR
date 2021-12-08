@@ -21,54 +21,86 @@
 </table>
 
 <script type="text/javascript">
-
-function search(submit) {
-    if(event.keyCode == 13) {
-        saveTextAsFile();       
-    }
-}
-
-function saveTextAsFile()
-{
-    var text = "X" + document.getElementById("inputTextToSave").value + "X";
-    var textLength = text.length;
-    var zipCodes = new String();
-    var i;
-    for(i=6;i<=textLength;i++){
-      var sixZip = text.substring((i-6),i);
-      if(sixZip.charAt(3)==' ' && isNaN(parseInt(text.charAt(i)))){ //läser XXX XX
-        var fiveZip = sixZip.substring(0,3) + sixZip.substring(4);
-      }
-      else if(sixZip.charAt(2)==' ' && isNaN(parseInt(text.charAt(i)))){ //läser XX XXX 
-        var fiveZip = sixZip.substring(0,2) + sixZip.substring(3);
-      }
-      else if(isNaN(parseInt(sixZip.charAt(5)))){ //Läser XXXXX
-        var fiveZip = sixZip.substring(0,5)
-      }
-      if(parseInt(fiveZip)>10000 	 && 
-      	 parseInt(fiveZip)<100000	 &&
-         !zipCodes.includes(fiveZip) &&
-         isNaN(parseInt(text.charAt(i-7)))){
-        var zipCodes = zipCodes.concat(fiveZip+"\r\n");
+    function search(submit) {
+      if (event.keyCode == 13) {
+        saveTextAsFile()
       }
     }
-    var textToSaveAsBlob = new Blob([zipCodes], {type:"text/plain"});
-    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
-    var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
-    var downloadLink = document.createElement("a");
-    downloadLink.download = fileNameToSaveAs;
-    downloadLink.innerHTML = "Download File";
-    downloadLink.href = textToSaveAsURL;
-    downloadLink.onclick = destroyClickedElement;
-    downloadLink.style.display = "none";
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-}
-function destroyClickedElement(event)
-{
-    document.body.removeChild(event.target);
-}
-</script>
+
+    function saveTextAsFile() {
+      var text = "X" + document.getElementById("inputTextToSave").value + "X";
+      var textLength = text.length
+      var zipCodes = new String()
+      var i;
+
+      for (i = 12; i <= textLength; i++) { // matar intervall XXXXX-YYYYY
+        var intervalZip = text.substring((i - 12), i + 1)
+
+        if (intervalZip.charAt(6) == '-' && isNaN(parseInt(intervalZip.charAt(i - 12))) && isNaN(parseInt(intervalZip.charAt(i)))) {
+          var intervalA = parseInt(intervalZip.substring(1, 6))
+          var intervalB = parseInt(intervalZip.substring(7, 12))
+
+          for (intervalA; intervalA <= intervalB; intervalA++) {
+            var text = text.concat(intervalA + "X")
+
+          }
+        }
+      }
+      var textLength = text.length
+
+      /*for (i = 6; i <= textLength; i++) {
+        var sixZip = text.substring((i - 6), i)
+        if (sixZip.charAt(3) == ' ' && isNaN(parseInt(text.charAt(i)))) { //läser XXX XX
+          var fiveZip = sixZip.substring(0, 3) + sixZip.substring(4)
+        } else if (sixZip.charAt(2) == ' ' && isNaN(parseInt(text.charAt(i)))) { //läser XX XXX
+          var fiveZip = sixZip.substring(0, 2) + sixZip.substring(3)
+        } else if (isNaN(parseInt(sixZip.charAt(5)))) { //Läser XXXXX
+          var fiveZip = sixZip.substring(0, 5)
+        }
+        if (parseInt(fiveZip) > 10000 &&
+          parseInt(fiveZip) < 100000 &&
+          !zipCodes.includes(fiveZip) &&
+          isNaN(parseInt(text.charAt(i - 7)))) {
+          var zipCodes = zipCodes.concat(fiveZip + "\r\n")
+        }
+      }*/
+
+      for (i = 6; i <= textLength; i++) {
+        var sevenZip = text.substring((i - 6), i + 1)
+        if (sevenZip.charAt(3) == ' ' && isNaN(parseInt(text.charAt(i)))) { //läser XXX XX
+          var fiveZip = sevenZip.substring(0, 3) + sevenZip.substring(4)
+        } else if (sevenZip.charAt(2) == ' ' && isNaN(parseInt(text.charAt(i)))) { //läser XX XXX
+          var fiveZip = sevenZip.substring(0, 2) + sevenZip.substring(3)
+        } else if (isNaN(parseInt(sevenZip.charAt(0))) && isNaN(parseInt(sevenZip.charAt(6)))) { //Läser XXXXX
+          var fiveZip = sevenZip.substring(1, 6)
+        }
+        if (parseInt(fiveZip) > 10000 &&
+          parseInt(fiveZip) < 100000 &&
+          !zipCodes.includes(fiveZip) &&
+          isNaN(parseInt(text.charAt(i - 7)))) {
+          var zipCodes = zipCodes.concat(fiveZip + "\r\n")
+        }
+      }
+
+      var textToSaveAsBlob = new Blob([zipCodes], {
+        type: "text/plain"
+      });
+      var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+      var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+      var downloadLink = document.createElement("a");
+      downloadLink.download = fileNameToSaveAs;
+      downloadLink.innerHTML = "Download File";
+      downloadLink.href = textToSaveAsURL;
+      downloadLink.onclick = destroyClickedElement;
+      downloadLink.style.display = "none";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+    }
+
+    function destroyClickedElement(event) {
+      document.body.removeChild(event.target);
+    }
+  </script>
 
 </body>
 </html>
